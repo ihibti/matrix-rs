@@ -1,0 +1,11 @@
+[package]
+name = "matrix"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "matrix"
+path = "src/lib.rs"
+
+[profile.release]
+opt-level = 3
