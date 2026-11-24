@@ -213,14 +213,14 @@ impl<K: Scalar> std::ops::Add for Matrix<K> {
 
 impl<K: Scalar> std::ops::AddAssign<&Matrix<K>> for Matrix<K> {
     fn add_assign(&mut self, rhs: &Self) {
-        <Matrix<K>>::add_assign(self, &rhs);
+        <Matrix<K>>::add_assign(self, rhs);
     }
 }
 
 impl<K: Scalar> std::ops::Sub for &Matrix<K> {
     type Output = Matrix<K>;
     fn sub(self, rhs: Self) -> Self::Output {
-        <Matrix<K>>::sub(self, &rhs)
+        <Matrix<K>>::sub(self, rhs)
     }
 }
 
@@ -233,14 +233,14 @@ impl<K: Scalar> std::ops::Sub for Matrix<K> {
 
 impl<K: Scalar> std::ops::SubAssign<&Matrix<K>> for Matrix<K> {
     fn sub_assign(&mut self, rhs: &Self) {
-        <Matrix<K>>::sub_assign(self, &rhs);
+        <Matrix<K>>::sub_assign(self, rhs);
     }
 }
 
 impl<K: Scalar> std::ops::Mul<K> for &Matrix<K> {
     type Output = Matrix<K>;
     fn mul(self, rhs: K) -> Self::Output {
-        <Matrix<K>>::scl(&self, rhs)
+        <Matrix<K>>::scl(self, rhs)
     }
 }
 
