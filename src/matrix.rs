@@ -109,9 +109,9 @@ impl<K: Scalar> Matrix<K> {
     pub fn mul_vec(&self, v: &Vector<K>) -> Vector<K> {
         assert_eq!(self.cols(), v.size(),);
         let mut acc = vec![K::zero(); self.rows()];
-        for i in 0..self.rows() {
+        for (i, a) in acc.iter_mut().enumerate() {
             for j in 0..self.cols() {
-                acc[i] = self.get(i, j).mul_add(v.data[j], acc[i])
+                *a = self.get(i, j).mul_add(v.data[j], *a)
             }
         }
         Vector::new(acc)
@@ -169,8 +169,8 @@ impl<K: Scalar, const R: usize, const C: usize> From<[[K; C]; R]> for Matrix<K> 
         assert!(R > 0 && C > 0, "Matrix dimensions must be > 0");
         let mut data = Vec::with_capacity(R * C);
         for c in 0..C {
-            for r in 0..R {
-                data.push(rows[r][c]);
+            for row in &rows {
+                data.push(row[c]);
             }
         }
         Self {
