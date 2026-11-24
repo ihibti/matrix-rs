@@ -35,10 +35,10 @@ Time and space are the bounds the subject sets, and each implementation stays wi
 
 ## Design choices
 
-- **Generic scalars.** Everything is generic over `K: Scalar`. `Scalar` carries an associated `type Real: RealScalar`, and `abs`, `re` and `conjugate` go through it, so complex numbers (exercise 15) can be added without touching the algorithms. Only `f32` implements it today.
+- **Generic scalars.** `Vector` and `Matrix` are generic over `K: Scalar`. Norms and absolute values return the associated `K::Real: RealScalar`, and pivots are compared through it. Only `f32` implements `Scalar` today. Complex numbers (exercise 15) will need a complex `Scalar`, plus `conjugate` in `dot` and a conjugate transpose.
 - **Column-major storage.** `Matrix` stores its entries column by column (`data[c * rows + r]`), while `Matrix::from` takes row-major literals, the way a matrix is written on paper.
 - **Fused multiply-add.** `mul_add` is part of `Scalar`. Linear combination, the Euclidean norm, the cross product, both matrix products and the determinant's elimination use it, so each multiply-add rounds once instead of twice.
-- **Panics for shapes, `Result` for data.** A shape mismatch is a programming error, so it panics with a message, the way an out-of-range index does. A singular matrix is a property of the data, so `inverse` returns `Result<Matrix<K>, MatrixError>`.
+- **Panics for shapes, `Result` for singular matrices.** A shape mismatch is a programming error, so it panics with a message. A singular matrix is a property of the data, so `inverse` returns `Result<Matrix<K>, MatrixError>`. Singularity is detected by an exactly zero pivot, so a matrix that is singular only up to f32 rounding, like `[[1, 2, 3], [4, 5, 6], [7, 8, 9]]`, still returns `Ok`, with entries in the millions.
 - **No dependencies.**
 
 ## Run
@@ -48,7 +48,7 @@ cargo test
 cargo run --example ex05
 ```
 
-Each example runs the subject's test cases for one exercise. The comment under each line is the value the subject expects: f32 output can differ in the last digit, and elimination can print `-0`.
+Each example exercises one part of the subject. Where the subject gives an expected value, it appears as a comment under the line that prints it: f32 output can differ in the last digit, and elimination can print `-0`.
 
 ## Status
 
