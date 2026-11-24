@@ -1,5 +1,5 @@
 use std::fmt::{Debug, Display};
-use std::ops::{Add, Sub, Mul, Div, Neg, AddAssign, SubAssign, MulAssign};
+use std::ops::{Add, AddAssign, Div, Mul, MulAssign, Neg, Sub, SubAssign};
 
 pub trait Scalar:
     Copy
@@ -34,19 +34,39 @@ pub trait RealScalar: Scalar<Real = Self> + PartialOrd {
 impl Scalar for f32 {
     type Real = f32;
 
-    fn zero() -> Self { 0.0 }
-    fn one() -> Self { 1.0 }
-    fn mul_add(self, a: Self, b: Self) -> Self { f32::mul_add(self, a, b) }
-    fn abs(self) -> Self::Real { f32::abs(self) }
-    fn conjugate(self) -> Self { self }
-    fn re(self) -> Self::Real { self }
-    fn from_f32(x: f32) -> Self { x }
+    fn zero() -> Self {
+        0.0
+    }
+    fn one() -> Self {
+        1.0
+    }
+    fn mul_add(self, a: Self, b: Self) -> Self {
+        f32::mul_add(self, a, b)
+    }
+    fn abs(self) -> Self::Real {
+        f32::abs(self)
+    }
+    fn conjugate(self) -> Self {
+        self
+    }
+    fn re(self) -> Self::Real {
+        self
+    }
+    fn from_f32(x: f32) -> Self {
+        x
+    }
 }
 
 impl RealScalar for f32 {
-    fn sqrt(self) -> Self { f32::sqrt(self) }
-    fn powi(self, n: i32) -> Self { f32::powi(self, n) }
-    fn max(self, other: Self) -> Self { f32::max(self, other) }
+    fn sqrt(self) -> Self {
+        f32::sqrt(self)
+    }
+    fn powi(self, n: i32) -> Self {
+        f32::powi(self, n)
+    }
+    fn max(self, other: Self) -> Self {
+        f32::max(self, other)
+    }
 }
 
 #[cfg(test)]

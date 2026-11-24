@@ -1,4 +1,4 @@
-use matrix::{Vector,Matrix};
+use matrix::{Matrix, Vector};
 fn main() {
     let mut u = Vector::from([2., 3.]);
     let v = Vector::from([5., 7.]);
@@ -17,12 +17,12 @@ fn main() {
     println!("{}", u);
     // [4]
     // [6]
-    let  u = Matrix::from([[1., 2.], [3., 4.]]);
+    let u = Matrix::from([[1., 2.], [3., 4.]]);
     let v = Matrix::from([[7., 4.], [-2., 2.]]);
     println!("{}", u.add(&v));
     // [8.0, 6.0]
     // [1.0, 6.0]
-    let  u = Matrix::from([[1., 2.], [3., 4.]]);
+    let u = Matrix::from([[1., 2.], [3., 4.]]);
     let v = Matrix::from([[7., 4.], [-2., 2.]]);
     println!("{}", u.sub(&v));
     // [-6.0, -2.0]
