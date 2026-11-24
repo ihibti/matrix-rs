@@ -83,6 +83,7 @@ impl<K: Scalar> Matrix<K> {
     }
 
     pub fn inverse(&self) -> Result<Matrix<K>, MatrixError> {
+        assert!(self.is_square(), "inverse: Matrix must be square");
         let n = self.rows;
         let mut m = self.clone();
         let mut inv = Matrix::identity(n);
@@ -284,6 +285,20 @@ mod tests {
     fn inverse_singular_errs() {
         let m: Matrix<f32> = Matrix::from([[1., -1.], [-1., 1.]]);
         assert!(matches!(m.inverse(), Err(crate::MatrixError::Singular)));
+    }
+
+    #[test]
+    #[should_panic(expected = "inverse: Matrix must be square")]
+    fn inverse_wide_panics() {
+        let m: Matrix<f32> = Matrix::from([[1., 2., 3.], [4., 5., 6.]]);
+        let _ = m.inverse();
+    }
+
+    #[test]
+    #[should_panic(expected = "inverse: Matrix must be square")]
+    fn inverse_tall_panics() {
+        let m: Matrix<f32> = Matrix::from([[1., 2.], [3., 4.], [5., 6.]]);
+        let _ = m.inverse();
     }
 
     #[test]
