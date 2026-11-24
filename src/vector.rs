@@ -228,9 +228,11 @@ impl<K: Scalar> FromIterator<K> for Vector<K> {
 
 #[cfg(test)]
 mod tests {
-    use crate::approx;
-
     use super::*;
+
+    fn approx(u: f32, v: f32) {
+        assert!((u - v).abs() < 0.00001)
+    }
 
     #[test]
     fn from_array() {
