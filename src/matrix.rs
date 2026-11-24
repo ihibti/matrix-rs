@@ -273,6 +273,13 @@ mod tests {
     }
 
     #[test]
+    fn from_rectangular_literal_stores_column_major() {
+        let m: Matrix<f32> = Matrix::from([[1., 2., 3.], [4., 5., 6.]]);
+        assert_eq!(m.shape(), (2, 3));
+        assert_eq!(m.data, vec![1., 4., 2., 5., 3., 6.]);
+    }
+
+    #[test]
     fn display_row_by_row() {
         let m: Matrix<f32> = Matrix::from([[1.0, 2.0], [3.0, 4.0]]);
         assert_eq!(format!("{}", m), "[1, 2]\n[3, 4]\n");
