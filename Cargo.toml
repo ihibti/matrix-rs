@@ -2,6 +2,11 @@
 name = "matrix"
 version = "0.1.0"
 edition = "2024"
+description = "Linear algebra from scratch: vectors, matrices, Gaussian elimination, determinants, inverses."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/ihibti/matrix-rs"
+readme = "README.md"
+publish = false
 
 [lib]
 name = "matrix"
