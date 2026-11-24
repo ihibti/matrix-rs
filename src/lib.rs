@@ -1,9 +1,7 @@
-pub mod complex;
 pub mod decomp;
 pub mod error;
 pub mod lerp;
 pub mod matrix;
-pub mod projection;
 pub mod scalar;
 pub mod vector;
 
